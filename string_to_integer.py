@@ -18,11 +18,14 @@ class Solution:
         if num == '':
             return 0
         else:
-            result = int(sign + num)
+            result = int(num)
+            if sign == '-':
+                result = (-1)*result
             if (result < (-2)**31):
                 result = (-2)**31
             elif (result > ((2)**31) - 1):
                 result = ((2)**31) - 1
+            
             return result
 
 def num_form(j, s, num):
