@@ -6,14 +6,11 @@ class Solution:
         if len(s) == 0:
             return 0
         
-        if s[0]=='-':
-            sign += '-'
-            num = num_form(1, s, num)
-        elif s[0]=='+':
-            sign += '+'
-            num = num_form(1, s, num)
-        elif '0' <= s[0] and '9' >= s[0]:
+        if '0' <= s[0] and '9' >= s[0]:
             num = num_form(0, s, num)
+        else:
+            sign += s[0]
+            num = num_form(1, s, num) 
         
         if num == '':
             return 0
@@ -25,8 +22,9 @@ class Solution:
                 result = (-2)**31
             elif (result > ((2)**31) - 1):
                 result = ((2)**31) - 1
-            
+
             return result
+
 
 def num_form(j, s, num):
     for i in range(j,len(s)):
@@ -35,3 +33,4 @@ def num_form(j, s, num):
         else:
             break
     return num
+
