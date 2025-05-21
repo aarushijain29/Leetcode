@@ -2,10 +2,10 @@ class Codec:
     def encode(self, strs: List[str]) -> str:
         """Encodes a list of strings to a single string.
         """
-        res = ""
+        res = []
         for s in strs:
-            res += (str(len(s)) + '#' + s)
-        return res
+            res.append(str(len(s)) + '#' + s)
+        return ''.join(res)
 
     def decode(self, s: str) -> List[str]:
         """Decodes a single string to a list of strings.
