@@ -2,10 +2,10 @@ class Solution:
     def evalRPN(self, tokens: List[str]) -> int:
         stack = []
         operators = ['+', '-', '*', '/']
+
         for token in tokens:
             if token in operators:
-                op2 = stack.pop()
-                op1 = stack.pop()
+                op2, op1 = stack.pop(), stack.pop()
                 if token == operators[0]:
                     stack.append(op1 + op2)
                 elif token == operators[1]:
