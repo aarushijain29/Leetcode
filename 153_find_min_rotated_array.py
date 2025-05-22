@@ -13,9 +13,9 @@ class Solution:
             # min(nums) will be found in nums[m + 1:r]
             if nums[m] > nums[r]:
                 l = m + 1
-                
+
             # since nums[m] is smaller than all nums right of it
             # min(nums) will be found in nums[l:m]
             # (nums[m] can also be min(nums))
-            elif nums[m] <= nums[r]:
+            else:
                 r = m
