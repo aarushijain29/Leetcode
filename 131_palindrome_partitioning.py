@@ -10,6 +10,7 @@ class Solution:
 
         res = []
         cur_grp = []
+        dp = [[0 for i in range(len(s))] for i in range(len(s))]
 
         # finds palindromic substrings starting at s[i]
         def backtrack(i):
@@ -21,12 +22,19 @@ class Solution:
             
             # current group holds all palindromic substrs till s[i] (not incl)
             # we will find all palindromic substr starting at idx i
-            # we will explore each substr s[i : j] where j = i till len(s)
+            # we will explore each substr starting at index i
+            # O(2^N); N = len(s)
+            # at each idx i we have two choices - to partition or not partition at i i.e. total 2^N choices
             for j in range(i, len(s)):
-                if is_palindrome(i, j):
-                    cur_grp.append(s[i:j+1])
+                if dp[i][j] == 1 or is_palindrome(i, j):
+                    dp[i][j] == 1
+                    cur_grp.append(s[i:j+1]) # O(N); N = len(s)
                     backtrack(j + 1)
                     cur_grp.pop()
+            
+            # total time complexity: O(N * 2^N)
+            # space: O(N) as recursion stack can go as deep as N
+            # when all substrings are one char each
 
 
         backtrack(0)
