@@ -1,9 +1,9 @@
 class Solution:
     def numDecodings(self, s: str) -> int:
-        cache = {}
+        cache = {len(s) : 1}
 
-        def dfs(i): # number of ways to decode str starting at idx i
-            if i >= len(s): # reached end of str i.e. str is valid
+        def top_down(i): # number of ways to decode str starting at idx i
+            if i == len(s): # reached end of str i.e. str is valid
                 return 1
             if s[i] == '0': # found lone 0 i.e. str is invalid
                 return 0
@@ -19,5 +19,14 @@ class Solution:
             cache[i] = res
             return cache[i]
         
+        for i in range(len(s) - 1, -1, -1):
+            if s[i] == '0':
+                cache[i] = 0
+            else:
+                cache[i] = cache[i + 1]
 
-        return dfs(0)
+            if i + 1 < len(s):
+                if s[i] == '1' or (s[i] == '2' and s[i + 1] in '0123456'):
+                    cache[i] += cache[i + 2] # consider number s[i + 1 : i + 2 + 1]
+
+        return cache[0] # or dfs(0)
